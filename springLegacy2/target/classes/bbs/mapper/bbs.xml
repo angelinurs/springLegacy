@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bbs">
+	
+	<!-- 전체 게시물 수 :: status 가 0 인 게시물만 -->
+	<select id="total_count" resultType="int">
+		select COUNT(*) from `employees`.`bbs_t`
+		WHERE status = 0
+		ORDER BY b_idx DESC
+	</select>
+
+	<!-- 게시물 paging 나중에 다뤄보기  
+	<select id="all" resultType="bbs.vo.BBsVO">
+		select * from `employees`.`bbs_t`
+		WHERE status = 0
+		ORDER BY b_idx DESC
+		LIMIT #{limit} OFFSET #{from}
+	</select>
+	-->
+	
+	<!-- 게시물 가져올때 resultMap 사용하기 -->
+	<!-- 하단의 id="list" 인 select 를 실행할때 사용된다. -->
+	<resultMap type="bbs.vo.BBsVO" id="map1">
+		<id property="b_idx" column="b_idx" />
+		<!-- 
+			하나의 게시물에 여러개의 comment 가 존재할수 있으므로
+			집합구조를 일대 다의 관계에 맞추어 collection 을 선언한다. 
+		-->
+		<collection property="commentList" 
+					ofType="bbs.vo.CommentVO" 
+					select="comment.list"
+					column="b_idx" />
+		
+	</resultMap>
+	
+	<!-- Paging -->
+	<select id="list" resultMap="map1">
+		SELECT a.* 
+		FROM ( 
+				SELECT @RN:=@RN+1 AS row_num, b.* 
+				FROM ( 
+					SELECT * FROM `employees`.`bbs_t`
+		            WHERE status=0
+		            ORDER BY b_idx DESC
+		            ) b, (SELECT @RN:=0) r
+			) a
+	</select>
+	
+	<select id="searchById" resultMap="map1" parameterType="String">
+		select * from `employees`.`bbs_t`
+		WHERE b_idx=#{idx}
+	</select>
+
+	<!-- 
+	<insert id="insert" parameterType="bbs.vo.BBsVO">
+		INSERT INTO `employees`.`bbs_t`(subject, writer, content, write_date, ip, file_name, ori_name, hit, status)
+		VALUES( #{subject}, #{writer}, #{content}, NOW(), #{ip}, #{file_name}, #{ori_name}, 0, 0 )
+	</insert>
+	 -->
+	<insert id="insert" parameterType="bbs.vo.BBsVO">
+		INSERT INTO `employees`.`bbs_t`(subject, writer, content, write_date, ip, hit, status)
+		VALUES( #{subject}, #{writer}, #{content}, NOW(), #{ip}, 0, 0 )
+	</insert>
+
+	
+	<update id="updateHitCount" parameterType="java.util.Map">
+		UPDATE `employees`.`bbs_t`
+		SET hit = #{count}
+		WHERE b_idx=#{no}
+	</update>
+	
+	<update id="updateBBS" parameterType="java.util.Map">
+		UPDATE `employees`.`bbs_t`
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="subject != null" >
+				subject = #{subject},
+			</if>
+			<if test="ip != null" >
+				ip = #{ip},
+			</if>
+			<if test="content != null" >
+				content = #{content},
+			</if>
+			<if test="fname != null" >
+				file_name = #{fname},
+				ori_name = #{oname},
+			</if>
+		</trim>
+		WHERE b_idx=#{b_idx}
+	</update>
+	
+	<update id="deleteBBS" parameterType="String" >
+		UPDATE `employees`.`bbs_t`
+		SET status = 1
+		WHERE b_idx=#{no}
+	</update>
+</mapper>

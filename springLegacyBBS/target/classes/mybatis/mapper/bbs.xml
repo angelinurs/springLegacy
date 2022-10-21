@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bbs">
+
+  <resultMap type="mybatis.vo.BbsVO" id="map1">
+  	<id property="b_idx" column="b_idx"/>
+  	
+  	<collection property="c_list" javaType="java.util.List" 
+  		ofType="mybatis.vo.CommVO" select="comm.list" column="b_idx"/>
+  </resultMap>
+  
+  <!-- 총 게시물의 수를 반환 -->
+  <select id="total_count" resultType="int" parameterType="String">
+  	SELECT COUNT(*) FROM bbs_t 
+  	WHERE status = 0 And bname = #{bname}
+  </select>
+  
+  <select id="total" resultMap="map1">
+  	SELECT * FROM bbs_t WHERE status = 0 ORDER BY b_idx DESC
+  </select>
+  
+  <!-- 한 페이지에 보여질 게시물들 반환 -->
+  <select id="list" resultMap="map1" parameterType="Map">
+  	SELECT a.* FROM(
+  		SELECT @RN:=@RN+1 AS rownum, b.* FROM(
+  			SELECT * FROM bbs_t 
+  			WHERE status = 0 AND bname = #{bname}
+  			ORDER BY b_idx DESC
+  		) b, (SELECT @RN:=0) r
+  	) a
+  	WHERE rownum BETWEEN #{begin} AND #{end} 
+  </select>
+  
+  <!-- 게시글 저장 -->
+  <insert id="add" parameterType="Map">
+  	INSERT INTO bbs_t(subject, writer, content, file_name, ori_name,
+		ip, write_date, hit, status, bname)
+	VALUES(#{subject}, #{writer}, #{content}, #{file_name}, #{ori_name},
+		#{ip}, NOW(), 0, 0, #{bname})
+  </insert>
+  
+  <!-- 게시글의 기본키를 받아서 해당 게시글 반환 -->
+  <select id="get_bbs" resultMap="map1" parameterType="String">
+  	SELECT * FROM bbs_t
+  	WHERE b_idx = #{no}
+  </select>
+  
+  <update id="edit" parameterType="mybatis.vo.BbsVO">
+  	UPDATE bbs_t
+  	SET subject = #{subject},
+  		content = #{content},
+  		ip=#{ip}
+  		<if test="file_name != null">
+  			,file_name = #{file_name}
+  			,ori_name = #{ori_name}
+  		</if>
+  	WHERE b_idx=#{b_idx}
+  </update>
+  
+  <update id="hit" parameterType="String">
+  	UPDATE bbs_t
+  	SET hit=hit+1
+  	WHERE b_idx=#{b_idx}
+  </update>
+  
+  <update id="del" parameterType="String">
+  	UPDATE bbs_t
+  	SET status=1
+  	WHERE b_idx=#{b_idx}
+  </update>
+  
+</mapper>
+
+
+
+
+
+
+
