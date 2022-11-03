@@ -43,7 +43,7 @@
 	<body>
 		<div id="wrap">
 			<header>
-				<h1>충전소 목록</h1>
+				<h1>입찰공고목록 정보조회</h1>
 			</header>
 			<article>
 				<table>
@@ -61,14 +61,22 @@
 							<td colspan="9">
 								<div id="searchFrom">
 									<form action="" method="">
-										<label for="opt">검색 방식 선택</label>
-										<select id="opt" name="opt" >
-											<option value="0" >입찰공고번호 </option>
-											<option value="1" >등록일시</option>
-											<option value="2" >변경일시 </option>
+										<label for="inqryDiv">검색 방식 :&nbsp;</label>
+										<select id="inqryDiv" name="opt" >
+											<option value="1" >입찰공고번호 </option>
+											<option value="2" >등록일시</option>
+											<option value="3" >변경일시 </option>
 										</select>
 										<span>
+											
+											<label for="inqryBgnDt">등록일시 :&nbsp;</label>
+											<input type="date" id="inqryBgnDt" name="inqryBgnDt" /> 
+											<input type="time" id="inqryBgnDt" name="inqryBgnDt" />
+											<label for="inqryEndDt">변경일시 :&nbsp;</label>
+											<input type="datetime-local" id="inqryEndDt" name="inqryEndDt" /> 
+											<label for="bidNtceNo">입찰공고번호 :&nbsp;</label>
 											<input type="text" id="bidNtceNo" name="bidNtceNo" /> 
+											<input type="hidden" id="type" name="type" /> 
 										</span>
 										<span>
 											<button type="button" id="typeBTN" name="typeBTN" >검색</button> 
@@ -111,21 +119,29 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		<script>
 			$(function(){
-				$( "#opt" ).bind( 'change', function(){
-					
-					// 0 : 입찰공고번호
-					// 1 : 등록일시
-					// 2 : 변경일시
-					
-					let $tag = $("<input type='text'/>");
-					$tag.attr( 'name', 'reg');
-					console.log( $tag.attr( 'name' ) );
+				$( "#inqryDiv" ).bind( 'change', function(){
+					// 1 : 입찰공고번호
+					// 2 : 등록일시
+					// 3 : 변경일시
 					switch( this.value ) {
-						case '2' : console.log( '2' ); break;
-						case '1' : console.log( '1' ); break;
-						default : console.log( '0' ); 
+						case '2' :
+							console.log( '2' );
+                            $( '#bidNtceNo').attr( 'disabled', 'disabled' );
+                            $( '#inqryBgnDt').removeAttr( 'disabled' );
+                            $( '#inqryEndDt').attr( 'disabled', 'disabled' );
+                            break;
+						case '3' :
+							console.log( '3' ); 
+                            $( '#bidNtceNo').attr( 'disabled', 'disabled' );
+                            $( '#inqryBgnDt').attr( 'disabled', 'disabled' );
+                            $( '#inqryEndDt').removeAttr( 'disabled' );
+                            break;
+						default :
+							console.log( '1' );
+                            $( '#bidNtceNo').removeAttr( 'disabled' );
+                            $( '#inqryBgnDt').attr( 'disabled', 'disabled' );
+                            $( '#inqryEndDt').attr( 'disabled', 'disabled' );
 					}
-					
 				});
 				
 					

@@ -31,6 +31,5 @@
 	</bean>
 	
 	<context:component-scan base-package="mybatis.dao" />
-	
 		
 </beans>
