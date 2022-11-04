@@ -42,6 +42,7 @@
 		<interceptor>
 			<mapping path="/bravo/*"/>
 			<mapping path="/bbs/*"/>
+			<mapping path="/location/*"/>
 			<beans:ref bean="log_inter" />
 		</interceptor>
 	

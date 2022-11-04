@@ -22,7 +22,7 @@
 		<!-- img태그에서 title은 설명을 보여주는 역활, alt는
 		 스크린리더기에서 읽혀지고 또는 이미지 손실시 대신 출력되는 문장! -->
 			<a href="">
-				<img src="resources/img/@img00.png" title="서울안전체험 한마당봉사" 
+				<img src="resources/img/@img00.jpg" title="서울안전체험 한마당봉사" 
 					alt="서울안전체험 한마당봉사"/>
 			</a>
 		</div>
@@ -31,7 +31,7 @@
 				<p class="title">기브유 후원참여</p>
 				<p class="news_src">
 					<a href="" class="thum_img">
-						<img src="resources/img/@img01.png" alt="기사사진"/>
+						<img src="resources/img/@img01.jpg" alt="기사사진"/>
 					</a>
 					<span class="ellip subject">
 						난청이지만 피아니스트가 되고픈 한별이의 이야기입니다.
@@ -46,7 +46,7 @@
 				<p class="title">기브유 후원금 쓰임현황</p>
 				<p class="news_src">
 					<a href="" class="thum_img">
-						<img src="resources/img/@img02.png" alt="기사사진"/>
+						<img src="resources/img/@img02.webp" alt="기사사진"/>
 					</a>
 					<span class="ellip subject">
 						레티하씨 가정에 희망의 집 선물
@@ -61,7 +61,7 @@
 				<p class="title">기브유 나눔영상</p>
 				<p class="news_src">
 					<span class="thum_img">
-						<img src="resources/img/@img03.png" alt="기사사진"/>
+						<img src="resources/img/@img03.jpg" alt="기사사진"/>
 						<span class="btn_play" title="동영상 재생">
 							<a href=""></a>
 						</span>							
@@ -109,12 +109,17 @@
 				  --%>
 				<c:forEach var="twit" items="${t_list }">
 				<a href="" class="article">
-					<span class="thum_img">
-						<img height="60" src="resources/bbs_upload/${twit.file_name }" alt="캠페인이미지"/>
-					</span>
-					<span class="src">
-						${twit.subject }
-					</span>
+					<div>
+						<div class="thum_img">
+						<%-- 
+							<img height="60" src="resources/bbs_upload/${twit.file_name }" alt="캠페인이미지"/>
+						 --%>
+							<img height="60" src="resources/img/@img04.jpg" alt="캠페인이미지"/>
+						</div>
+						<div class="src">
+							${twit.subject }
+						</div>
+					</div>
 					<span class="fclear"></span>
 				</a>
 				 </c:forEach>

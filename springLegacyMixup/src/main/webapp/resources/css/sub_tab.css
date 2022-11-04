@@ -29,11 +29,11 @@
 }
 .tab_type01 ul li.selected{
 	background: #fff;
-	border: 1px solid #ff4f00;
+	border: 1px solid #1673b2;
 	border-bottom: none;
 }
 .tab_type01 ul li.selected a{
-	color: #ff4f00;
+	color: #1673b2;
 }
 
 .tab_cont{

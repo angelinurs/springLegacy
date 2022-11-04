@@ -11,8 +11,35 @@
 		<link type="text/css" rel="stylesheet" href="resources/css/login.css"/>
 		
 		<style>
+			.section_snsAuth {
+				background-color: #d3e1fd;
+				height: 80px;				
+				width: 330px;
+				padding: 10px;
+				border-radius: 10% 20%; 
+			}
 		
-			#kakao{
+			.section_snsAuth header h1 {
+				padding: 3px;
+				font-weight: 900;
+				font-size: 20px;
+				color: #265ac1;
+				text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+			}
+			.socialAuth {
+				display: flex;
+				
+			}
+			.socialAuth div {
+				flat: left;
+				margin-right: 10px;
+			}
+			
+			.socialAuth img {
+				height: 45px;
+			}
+		
+			.kakao{
 				position: relative;
 				text-align: left;
 			}
@@ -89,21 +116,25 @@
 						</p>
 					</form>
 				</div>
-				<div id="kakao">
-					<c:set var="REST_API_KEY" value="798a60e3e91cbf6ef0d0e9093b43ffa3" />
-					<c:set var="REDIRECT_URI" value="http://localhost:8080/kakao/login" />
-					<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code">
-						<img src="resources/img/kakao_login.png">
-					</a>
-				</div>
-				<div id="naver">
-					<c:set var="client_id" value="798a60e3e91cbf6ef0d0e9093b43ffa3" />
-					<c:set var="redirectURI" value="http://localhost:8080/kakao/login" />
-					<a href="${apiURL }">
-						<img src="resources/img/naver_login.png" width="50%" height="50%" >
-						<img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/>
-					</a>
-				</div>
+				<section class="section_snsAuth">
+					<header><h1>Social Auth</h1></header>
+					<article class="socialAuth">
+						<div class="kakao">
+							<c:set var="REST_API_KEY" value="798a60e3e91cbf6ef0d0e9093b43ffa3" />
+							<c:set var="REDIRECT_URI" value="http://localhost:8080/kakao/login" />
+							<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code">
+								<img src="resources/img/kakao_login.png">
+							</a>
+						</div>
+						<div class="naver">
+							<c:set var="client_id" value="798a60e3e91cbf6ef0d0e9093b43ffa3" />
+							<c:set var="redirectURI" value="http://localhost:8080/kakao/login" />
+							<a href="${apiURL }">
+								<img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/>
+							</a>
+						</div>
+					</article>
+				</section>
 			</div>
 			<!-- ------------ -->
 		</div>

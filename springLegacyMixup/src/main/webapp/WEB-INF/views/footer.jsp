@@ -10,12 +10,12 @@
 			</ul>
 			<address>
 				서울특별시 중구 을지로 몇가 몇번지
-				대표이사: 마루치
+				대표이사: Alex
 				고객상담: 국번없이 114 혹은 
 				02-1234-1234 (평일 09:30~17:30)
 			</address>
 			<p class="copyright">
-				Copyright (c)2022 SK Telecom
+				Copyright (c)2022 Naru coding.
 				All rights reserved
 			</p>
 		</div>

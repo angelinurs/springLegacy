@@ -9,7 +9,7 @@
 #header{
 	position: relative;
 	width: 970px;
-	height: 140px;
+	height: 115px;
 	margin: auto;
 	/*border: 1px solid red;*/
 }
@@ -36,7 +36,8 @@
 	display: inline-block;
 	width: 161.5px;
 	height: 100%;
-	background-color: #ff5001;
+	/* background-color: #0c629b; */
+	background-color:  #1673b2;
 }
 #header>.gnb>li>a{
 	display: block;
@@ -61,7 +62,7 @@
 #header>.gnb>li>a>span.m04{background-position: 0 -66px;}
 #header>.gnb>li>a>span.m05{background-position: 0 -88px;}
 #header>.gnb>li:hover{
-	background-color: #e24c09;
+	background-color: #26b0c1;
 }
 
 /***** 푸터 영역 ******/
@@ -94,7 +95,7 @@
 	font-size: 12px;
 	font-weight: bold;
 }
-#footer .foot_guide li a:hover{ color: #ff4f00; }
+#footer .foot_guide li a:hover{ color: #1673b2; }
 
 #footer address{
 	font-size: 12px;
