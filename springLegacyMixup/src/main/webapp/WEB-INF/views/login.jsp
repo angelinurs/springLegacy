@@ -120,7 +120,7 @@
 					<header><h1>Social Auth</h1></header>
 					<article class="socialAuth">
 						<div class="kakao">
-							<c:set var="REST_API_KEY" value="798a60e3e91cbf6ef0d0e9093b43ffa3" />
+							<c:set var="REST_API_KEY" value='<%= System.getenv("KAKAO_REST_API_KEY") %>' />
 							<c:set var="REDIRECT_URI" value="http://localhost:8080/kakao/login" />
 							<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code">
 								<img src="resources/img/kakao_login.png">
