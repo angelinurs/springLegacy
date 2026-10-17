@@ -21,7 +21,7 @@ public class MemberControl {
 	@RequestMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView();
-		String naverClientId = "L3oXgo1YOPQuNGcHe68f";//애플리케이션 클라이언트 아이디값";
+		String naverClientId = System.getenv("NAVER_CLIENT_ID");//애플리케이션 클라이언트 아이디값";
 		try {
 		    String redirectURI = URLEncoder.encode("http://localhost:8080/callback", "UTF-8");
 		    SecureRandom random = new SecureRandom();

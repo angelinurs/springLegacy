@@ -97,7 +97,7 @@
 					</a>
 				</div>
 				<div id="naver">
-					<c:set var="client_id" value="798a60e3e91cbf6ef0d0e9093b43ffa3" />
+					<c:set var="client_id" value='<%= System.getenv("KAKAO_REST_API_KEY") %>' />
 					<c:set var="redirectURI" value="http://localhost:8080/kakao/login" />
 					<a href="${apiURL }">
 						<img src="resources/img/naver_login.png" width="50%" height="50%" >

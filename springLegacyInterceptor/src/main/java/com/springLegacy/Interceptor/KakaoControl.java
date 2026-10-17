@@ -24,7 +24,7 @@ public class KakaoControl {
 	@RequestMapping( "/kakao/login" )
 	public ModelAndView kakaoLogin( String code )	{
 		
-		String REST_API_KEY = "798a60e3e91cbf6ef0d0e9093b43ffa3";
+		String REST_API_KEY = System.getenv("KAKAO_REST_API_KEY");
 		String REDIRECT_URI = "http://localhost:8080/kakao/login";
 		
 		// 카카오 서버에서 인증코드 받기

@@ -29,8 +29,8 @@ public class NaverControl {
 	private HttpSession session;
 	
 	// naver login info
-	private String clientId = "L3oXgo1YOPQuNGcHe68f";//애플리케이션 클라이언트 아이디값";
-	private String clientSecret = "fmNWgZyHAI";//애플리케이션 클라이언트 시크릿값";
+	private String clientId = System.getenv("NAVER_CLIENT_ID");//애플리케이션 클라이언트 아이디값";
+	private String clientSecret = System.getenv("NAVER_CLIENT_SECRET");//애플리케이션 클라이언트 시크릿값";
 
 	@RequestMapping( "/callback" )
 	public ModelAndView login( String code, String state ) throws Exception {
